@@ -1,16 +1,13 @@
 OpenWrt ubus RPC Python API
 ===========================
 
-[![Latest Version][mdversion-button]][md-pypi]
-[![Python Versions][pyversion-button]][md-pypi]
 [![License: GPL v2][gpl2-button]](LICENSE.md)
 
 [gpl2-button]: https://img.shields.io/badge/License-GPL%20v2-blue.svg
-[md-pypi]: https://pypi.org/project/openwrt-ubus-rpc
-[mdversion-button]: https://img.shields.io/pypi/v/openwrt-ubus-rpc.svg
-[pyversion-button]: https://img.shields.io/pypi/pyversions/openwrt-ubus-rpc.svg
 
 Python client for the OpenWrt ubus RPC API.
+
+This fork contains a modified version of [Noltari](https://github.com/Noltari)'s code as used by the [Council Rock products group](https://github.com/orgs/CouncilRockProducts).
 
 Description
 -----------
@@ -25,7 +22,7 @@ This package has been developed to be used with https://home-assistant.io/ but i
 Disclaimer
 ----------
 
-openwrt-ubus-rpc was created for my own use, and for others who may wish to experiment with personal Internet of Things systems.
+openwrt-ubus-rpc was created for [Noltari](https://github.com/Noltari)'s own use, and for others who may wish to experiment with personal Internet of Things systems.
 
 This software is provided without warranty, according to the GNU Public Licence version 2, and should therefore not be used where it may endanger life, financial stakes or cause discomfort and inconvenience to others.
 
@@ -34,8 +31,6 @@ Usage
 
 ```python
 from openwrt.ubus import Ubus
-_ubus = Ubus(host="http://openwrt_host/ubus", user="openwrt_user", password="openwrt_password")
-_ubus.connect()
-_ubus.get_hostapd()
-_ubus.get_hostapd_clients("hostapd.wlan0")
+_ubus = Ubus.connect(f"https://{host}/ubus", "root", password)
+_ubus.call_rpc("system", "board")
 ```
