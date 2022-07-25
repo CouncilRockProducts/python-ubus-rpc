@@ -91,7 +91,6 @@ class Ubus:
         if len(result) > 1:
             return result[1]
 
-
     def read_file(self, path):
         """Read file from device."""
         result = self.call_rpc(
@@ -115,7 +114,10 @@ class Ubus:
         )
 
     def append_file(self, path, data, mode=0o600):
-        data = self.read_file(path) + data
+        try:
+            data = self.read_file(path) + data
+        except Exception:
+            pass
         self.write_file(path, data, mode)
 
     def get_uci_config(self, config, type):
